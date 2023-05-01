@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<body>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$('#doLogin').click(function(){
+			var id = $('#user_id').val()
+			var password = $('#password').val()
+			var data = { userid: id, userpasswd: password }
+			var request = $.ajax({
+			  url: "login",
+			  method: "POST",
+			  beforeSend: function(xhr){
+			  	xhr.setRequestHeader("Content-type","application/json");
+			  },			
+			  data: JSON.stringify(data),		
+			  dataType: "text",
+			  success: function(obj) {
+			  	console.log(obj);
+			  	window.location="/welcome";
+			  },
+			  error: function(xhr, status, error){
+			  	console.log(status);
+			  }	
+			});
+		});
+	});
+</script>
+id:<input type="text" id="user_id">
+password:<input type="password" id="password">
+<button type="button" id="doLogin">login</button>
+</body>
+</html>
